@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const headers = {
-    "Authorization": "Bearer qRmhozK9UFCUbzCd7nvtWGkYMCiJybRC",
+    "Authorization": "",
     "Content-Type": "application/json"
 };
 const topicClassifier = async (sampleTopics, userInputSummary) => {
