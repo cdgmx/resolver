@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const dotenv = require('dotenv');
+const path = require('path');
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 const headers = {
     "Authorization": envVars.STUDIO_AUTH_KEY,
