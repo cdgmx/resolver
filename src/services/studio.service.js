@@ -1,6 +1,8 @@
 const fetch = require("node-fetch");
+const dotenv = require('dotenv');
+dotenv.config({ path: path.join(__dirname, '../../.env') });
 const headers = {
-    "Authorization": "",
+    "Authorization": envVars.STUDIO_AUTH_KEY,
     "Content-Type": "application/json"
 };
 const topicClassifier = async (sampleTopics, userInputSummary) => {
