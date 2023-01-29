@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 const headers = {
-    "Authorization": envVars.STUDIO_AUTH_KEY,
+    "Authorization": process.env.STUDIO_AUTH_KEY,
     "Content-Type": "application/json"
 };
 const topicClassifier = async (sampleTopics, userInputSummary) => {
