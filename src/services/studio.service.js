@@ -46,7 +46,8 @@ const topicClassifier = async (sampleTopics, userInputSummary) => {
 };
 const customerChatService = async (inquiryTopicPrompt, userInput) => {
     const promptTrigger = "Mary:";
-    const combinedPrompt = inquiryTopicPrompt + userInput + '\n' + promptTrigger;
+    const combinedPrompt = inquiryTopicPrompt + ' ' + userInput + '\n' + promptTrigger;
+    console.log(combinedPrompt);
     return fetch("https://api.ai21.com/studio/v1/j1-jumbo/complete", {
         headers: headers,
         body: JSON.stringify({
@@ -86,7 +87,51 @@ const customerChatService = async (inquiryTopicPrompt, userInput) => {
     }).then(res => res.json());
 };
 
+const generateQuestionTopics = async (userQuestionTopicPrompt, userInput) => {
+    const promptTrigger = "topics:";
+    const combinedPrompt = userQuestionTopicPrompt + ' ' + userInput + '\n' + promptTrigger;
+    console.log(combinedPrompt);
+    return fetch("https://api.ai21.com/studio/v1/j1-large/complete", {
+    headers: headers,
+    body: JSON.stringify({
+        "prompt": combinedPrompt,
+        "numResults": 1,
+        "maxTokens": 10,
+        "temperature": 0,
+        "topKReturn": 0,
+        "topP":1,
+        "countPenalty": {
+            "scale": 0,
+            "applyToNumbers": false,
+            "applyToPunctuations": false,
+            "applyToStopwords": false,
+            "applyToWhitespaces": false,
+            "applyToEmojis": false
+        },
+        "frequencyPenalty": {
+            "scale": 0,
+            "applyToNumbers": false,
+            "applyToPunctuations": false,
+            "applyToStopwords": false,
+            "applyToWhitespaces": false,
+            "applyToEmojis": false
+        },
+        "presencePenalty": {
+            "scale": 0,
+            "applyToNumbers": false,
+            "applyToPunctuations": false,
+            "applyToStopwords": false,
+            "applyToWhitespaces": false,
+            "applyToEmojis": false
+        },
+        "stopSequences":["==="]
+        }),
+    method: "POST"
+    }).then(res => res.json());
+};
+
 module.exports = {
     topicClassifier,
-    customerChatService
+    customerChatService,
+    generateQuestionTopics
 };
